@@ -1,0 +1,44 @@
+<%- include ('../layouts/header') %>
+<h2><%= title %></h2>
+<p>
+    <a href="/lista/create/" class="btn btn-success">
+        Agregar una lista
+    </a>
+</p>
+
+<% if (data.length >= 1) { %>
+    <table class="table">
+        <tr>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Numero
+            </th>
+            <th></th>
+        </tr>
+
+        <% for(var i=0; i < data.length; i++) { %>
+            <tr>
+                <td>
+                    <%= data[i].nombre %>
+                </td>
+                <td>
+                    <%= data[i].numero %>
+                </td>
+                <td>
+                    <a href="/lista/edit/<%= data[i].lista %>" class="btn btn-success">Modificar</a>
+                    <a href="/lista/delete/<%= data[i].lista %>" class="btn btn-danger">Eliminar</a>
+                </td>
+            </tr>
+            <% } %>
+
+    </table>
+<% } else { %>
+    <table class="table">
+    </table>
+<% } %>
+
+
+
+<%- include ('../layouts/footer') %>

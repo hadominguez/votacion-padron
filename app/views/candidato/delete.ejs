@@ -1,0 +1,18 @@
+<%- include ('../layouts/header') %>
+<h2><%=title%></h2>
+<form class="form" name="myForm" action="/candidato/delete" method="post" enctype="application/x-www-form-urlencoded">
+    <div class="form-label-group" hidden>
+      <input type="number" class="form-control" id="candidato" name="candidato" required="" placeholder="candidato" value="<%= data.candidato %>">
+    </div>
+
+        <p>Apellido: <%= data.apellido %></p>
+        <p>Nombre:  <%= data.nombre %></p>
+        <p>Lista: <%= data.lista_nombre %></p>
+        <p>Puesto:  <%= data.descripcion %></p>
+        <p>Orden: <%= data.orden %></p>
+    <button type="submit" class="btn btn-primary">Eliminar</button>
+    
+  </form>
+
+  <%- include ('../layouts/footer') %>
+  

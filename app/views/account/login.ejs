@@ -1,0 +1,17 @@
+<%- include ('../layouts/header') %>
+<form class="form-signin" name="myForm" action="/login" method="post">
+    <div class="text-center mb-4">
+        <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+    </div>
+    <div class="form-label-group">
+      <input type="text" id="usuario" class="form-control" name="usuario" placeholder="Usuario" required="" autofocus="">
+    </div>
+    <br>
+    <div class="form-label-group">
+      <input type="password" id="contrasena" name="contrasena" class="form-control" placeholder="Clave" required="">
+    </div>
+    <br>
+    <button class="btn btn-lg btn-primary btn-block" id="submit" type="submit">Loguear</button>
+</form>
+<%- include ('../layouts/footer') %>
+

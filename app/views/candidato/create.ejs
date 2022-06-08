@@ -1,0 +1,32 @@
+<%- include ('../layouts/header') %>
+<h2><%=title%></h2>
+<form class="form" name="myForm" action="/candidato/create" method="post" enctype="application/x-www-form-urlencoded">
+    <div class="form-label-group">
+      <input type="text" class="form-control" id="apellido" name="apellido" required="" placeholder="Apellido" >
+    </div>
+    <div class="form-label-group">
+        <input type="text" class="form-control" id="nombre" name="nombre" required="" placeholder="Nombre" >
+    </div>
+    <div class="form-label-group">
+      <select name="lista" class="form-control">
+        <% for(var i=0; i < listas.length; i++) { %>
+        <option value="<%= listas[i].lista %>"><%= listas[i].nombre %></option>
+        <% } %>
+      </select>
+    </div>
+    <div class="form-label-group">
+      <select name="puesto" class="form-control">
+        <% for(var i=0; i < puestos.length; i++) { %>
+        <option value="<%= puestos[i].puesto %>"><%= puestos[i].descripcion %></option>
+        <% } %>
+      </select>
+    </div>
+    <div class="form-label-group">
+      <input type="number" class="form-control" id="orden" name="orden" required="" placeholder="Orden" >
+    </div>
+    <button type="submit" class="btn btn-primary">Crear</button>
+    
+  </form>
+
+  <%- include ('../layouts/footer') %>
+  

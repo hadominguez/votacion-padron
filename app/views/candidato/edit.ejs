@@ -1,0 +1,35 @@
+<%- include ('../layouts/header') %>
+<h2><%=title%></h2>
+<form class="form" name="myForm" action="/candidato/edit" method="post" enctype="application/x-www-form-urlencoded">
+    <div class="form-label-group" hidden>
+      <input type="number" class="form-control" id="candidato" name="candidato" required="" placeholder="candidato" value="<%= data.candidato %>">
+    </div>
+    <div class="form-label-group">
+      <input type="text" class="form-control" id="apellido" name="apellido" required="" placeholder="Apellido" value="<%= data.apellido %>">
+    </div>
+    <div class="form-label-group">
+        <input type="text" class="form-control" id="nombre" name="nombre" required="" placeholder="Nombre" value="<%= data.nombre %>">
+    </div>
+    <div class="form-label-group">
+      <select name="lista" class="form-control">
+        <% for(var i=0; i < listas.length; i++) { %>
+        <option value="<%= listas[i].lista %>" <% if (listas[i].lista == data.lista ) { %> selected <% } %> ><%= listas[i].nombre %></option>
+        <% } %>
+      </select>
+    </div>
+    <div class="form-label-group">
+      <select name="puesto" class="form-control">
+        <% for(var i=0; i < puestos.length; i++) { %>
+        <option value="<%= puestos[i].puesto %>" <% if (puestos[i].puestos == data.puestos ) { %> selected <% } %> ><%= puestos[i].descripcion %></option>
+        <% } %>
+      </select>
+    </div>
+    <div class="form-label-group">
+      <input type="number" class="form-control" id="orden" name="orden" required="" placeholder="Orden" value="<%= data.orden %>">
+    </div>
+    <button type="submit" class="btn btn-primary">Modificar</button>
+    
+  </form>
+
+  <%- include ('../layouts/footer') %>
+  

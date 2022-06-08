@@ -1,0 +1,44 @@
+<%- include ('../layouts/header') %>
+<h2><%= title %></h2>
+<p>
+    <a href="/puesto/create/" class="btn btn-success">
+        Agregar un puesto
+    </a>
+</p>
+
+<% if (data.length >= 1) { %>
+    <table class="table">
+        <tr>
+            <th>
+                Orden
+            </th>
+            <th>
+                Descripcion
+            </th>
+            <th></th>
+        </tr>
+
+        <% for(var i=0; i < data.length; i++) { %>
+            <tr>
+                <td>
+                    <%= data[i].orden %>
+                </td>
+                <td>
+                    <%= data[i].descripcion %>
+                </td>
+                <td>
+                    <a href="/puesto/edit/<%= data[i].puesto %>" class="btn btn-success">Modificar</a>
+                    <a href="/puesto/delete/<%= data[i].puesto %>" class="btn btn-danger">Eliminar</a>
+                </td>
+            </tr>
+            <% } %>
+
+    </table>
+<% } else { %>
+    <table class="table">
+    </table>
+<% } %>
+
+
+
+<%- include ('../layouts/footer') %>

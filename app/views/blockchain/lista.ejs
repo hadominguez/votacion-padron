@@ -1,0 +1,56 @@
+<%- include ('../layouts/header') %>
+<h2><%= title %></h2>
+<p>
+    <a href="/blockchain/create/" class="btn btn-success">
+        Agregar un servidor
+    </a>
+</p>
+
+<% if (data.length >= 1) { %>
+    <table class="table">
+        <tr>
+            <th>
+                IP
+            </th>
+            <th>
+                Puerto
+            </th>
+            <th>
+                Usuario
+            </th>
+            <th>
+                Clave
+            </th>
+            <th></th>
+        </tr>
+
+        <% for(var i=0; i < data.length; i++) { %>
+            <tr>
+                <td>
+                    <%= data[i].ip %>
+                </td>
+                <td>
+                    <%= data[i].puerto %>
+                </td>
+                <td>
+                    <%= data[i].usuario %>
+                </td>
+                <td>
+                    <%= data[i].clave %>
+                </td>
+                <td>
+                    <a href="/blockchain/edit/<%= data[i].bchain %>" class="btn btn-success">Modificar</a>
+                    <a href="/blockchain/delete/<%= data[i].bchain %>" class="btn btn-danger">Eliminar</a>
+                </td>
+            </tr>
+            <% } %>
+
+    </table>
+<% } else { %>
+    <table class="table">
+    </table>
+<% } %>
+
+
+
+<%- include ('../layouts/footer') %>

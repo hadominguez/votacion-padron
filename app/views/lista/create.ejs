@@ -1,0 +1,15 @@
+<%- include ('../layouts/header') %>
+<h2><%=title%></h2>
+<form class="form" name="myForm" action="/lista/create" method="post" enctype="application/x-www-form-urlencoded">
+    <div class="form-label-group">
+      <input type="text" class="form-control" id="nombre" name="nombre" required="" placeholder="Nombre" >
+    </div>
+    <div class="form-label-group">
+        <input type="number" class="form-control" id="numero" name="numero" required="" placeholder="Numero" >
+    </div>
+    <button type="submit" class="btn btn-primary">Crear</button>
+    
+  </form>
+
+  <%- include ('../layouts/footer') %>
+  

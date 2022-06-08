@@ -1,0 +1,18 @@
+<%- include ('../layouts/header') %>
+<h2><%=title%></h2>
+<form class="form" name="myForm" action="/lista/edit" method="post" enctype="application/x-www-form-urlencoded">
+    <div class="form-label-group" hidden>
+      <input type="number" class="form-control" id="lista" name="lista" required="" placeholder="lista" value="<%= data.lista %>">
+    </div>
+    <div class="form-label-group">
+      <input type="text" class="form-control" id="nombre" name="nombre" required="" placeholder="Nombre" value="<%= data.nombre %>">
+    </div>
+    <div class="form-label-group">
+        <input type="number" class="form-control" id="numero" name="numero" required="" placeholder="Numero" value="<%= data.numero %>">
+    </div>
+    <button type="submit" class="btn btn-primary">Modificar</button>
+    
+  </form>
+
+  <%- include ('../layouts/footer') %>
+  

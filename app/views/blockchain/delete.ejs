@@ -1,0 +1,16 @@
+<%- include ('../layouts/header') %>
+<h2><%=title%></h2>
+<form class="form" name="myForm" action="/blockchain/delete" method="post" enctype="application/x-www-form-urlencoded">
+    <div class="form-label-group" hidden>
+      <input type="number" class="form-control" id="bchain" name="bchain" required="" placeholder="bchain" value="<%= data.bchain %>" >
+    </div>
+        <p>IP: <%= data.ip %></p>
+        <p>Purto:  <%= data.puerto %></p>
+        <p>Usuario: <%= data.usuario %></p>
+        <p>Clave: <%= data.clave %></p>
+    <button type="submit" class="btn btn-primary">Eliminar</button>
+    
+  </form>
+
+  <%- include ('../layouts/footer') %>
+  
