@@ -50,7 +50,7 @@ const login = async (req, res) => {
 
 const logout = (req, res) => {
   res.clearCookie('auth');
-  res.redirect('index');
+  res.redirect('login');
 };
 
 
