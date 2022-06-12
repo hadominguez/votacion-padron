@@ -8,7 +8,22 @@ const PASSDB = "p4dr0n*";
 const PORTDB = "5432";
 const HTTP_PORT = 3011;
 
+const VALIDAR_HOST = "localhost";
+const VALIDAR_PORT = "3050";
+const VALIDAR_ROUTE = "verificar";
+const VALIDAR_USER =  "renaper";
+const VALIDAR_PASS =  "r3n4p3r";
+
+const PADRON_HOST = "localhost";
+const PADRON_PORT = "3010";
+const PADRON_ROUTE = "personas";
+const PADRON_USER =  "tesisfinal";
+const PADRON_PASS =  "t3s15f1n47";
+
+
 module.exports = { KEY, HTTP_PORT, 
     PASSDB, NAMEDB, HOTSDB, PORTDB, USERDB,
-    USER_API, PASS_API};
+    USER_API, PASS_API,
+    VALIDAR_HOST, VALIDAR_PORT, VALIDAR_ROUTE, VALIDAR_USER, VALIDAR_PASS,
+    PADRON_HOST, PADRON_PORT, PADRON_ROUTE, PADRON_USER, PADRON_PASS};
 

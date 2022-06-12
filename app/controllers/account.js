@@ -4,6 +4,7 @@ const rol = require('../db/models/rol');
 const JWT = require('jsonwebtoken');
 const ConfigEnv = require('../config');
 
+
 const loginRender = (req, res) => {
     res.render('account/login', {
       title: 'Login'
@@ -53,21 +54,10 @@ const logout = (req, res) => {
 };
 
 
-const registerRender = async (req, res) => {
-  res.render('account/register');
-};
-
-const register = async (req, res) => {
-  let clave = SHA256(req.body.contrasena).toString();
-  await usuario.createUsuario(req.body.usuario, clave);
-  res.redirect('register');
-};
 
 module.exports = {
     login,
     loginRender,
     logout,
-    register,
-    registerRender,
     permisosControl
 }

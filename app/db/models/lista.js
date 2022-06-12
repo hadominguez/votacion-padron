@@ -11,12 +11,12 @@ const getLista = async(request, response) => {
 
 const getListaFinal = async(request, response) => {
     try {
-        datos = await db.pool.query('SELECT puestos.orden, puestos.descripcion,  listas.numero ||' - '|| listas.nombre AS lista, candidatos.candidato, '+
-        ' candidatos.apellido ||', '|| candidatos.nombre as candidato_nombre '+
-        '    FROM public.puestos ' +
-        '    JOIN public.candidatos ON (candidatos.puesto = puestos.puesto AND candidatos.orden = 1) ' +
-        '    JOIN public.listas ON (listas.lista = candidatos.lista) '+
-        '    ORDER BY puestos.orden, listas.numero');
+        datos = await db.pool.query("SELECT puestos.orden, puestos.descripcion,  listas.numero ||' - '|| listas.nombre AS lista, candidatos.candidato, "+
+        " candidatos.apellido ||', '|| candidatos.nombre as candidato_nombre " +
+        "    FROM public.puestos " +
+        "    JOIN public.candidatos ON (candidatos.puesto = puestos.puesto AND candidatos.orden = 1) " +
+        "    JOIN public.listas ON (listas.lista = candidatos.lista) "+
+        "    ORDER BY puestos.orden, listas.numero ");
         return datos.rows;
     } catch (error) {
         return null;

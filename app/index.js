@@ -22,7 +22,6 @@ routerControl.use((req, res, next) => {
   if (token) {
     JWT.verify(token, ConfigEnv.KEY, (err, decoded) => {      
       if (err) {
-        //return res.json({ mensaje: 'Token inválido' });
         res.redirect('/login');
       } else {
         req.decoded = decoded;
@@ -33,8 +32,6 @@ routerControl.use((req, res, next) => {
     res.redirect('/login');
   }
 });
-
-
 
 const routerControlAPI = express.Router();
 routerControlAPI.use((req, res, next) => {

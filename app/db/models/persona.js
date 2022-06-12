@@ -36,16 +36,47 @@ const createPersona = async(request, response) => {
 
 const updatePersonaVota = (persona, response) => {
     try {
-        db.pool.query('UPDATE public.personas SET voto= true WHERE persona=$2', [persona]);
+        db.pool.query('UPDATE public.personas SET voto= true WHERE persona=$1', [persona]);
     } catch (error) {
         return null;
     }
 
 };
 
+
+const getCantVotos = async(usuario, clave) => {
+    try {
+        datos = await db.pool.query('SELECT count(Distinct persona) as total FROM public.personas WHERE voto = true ');
+        return datos.rows[0];
+    } catch (error) {
+        return null;
+    }
+}
+
+const getCantVotosNo = async(usuario, clave) => {
+    try {
+        datos = await db.pool.query('SELECT count(Distinct persona) as total FROM public.personas WHERE voto = false ');
+        return datos.rows[0];
+    } catch (error) {
+        return null;
+    }
+}
+
+const getCantVotantes = async(usuario, clave) => {
+    try {
+        datos = await db.pool.query('SELECT count(Distinct persona) as total FROM public.personas ');
+        return datos.rows[0];
+    } catch (error) {
+        return null;
+    }
+}
+
 module.exports = {
     getPersona,
     createPersona,
     updatePersonaVota,
-    getValidarPersona
+    getValidarPersona,
+    getCantVotos,
+    getCantVotosNo,
+    getCantVotantes
   }

@@ -1,10 +1,10 @@
 const persona = require('../db/models/persona');
 const blockchain = require('../db/models/blockchain');
 const fetch = require('node-fetch');
+const ConfigEnv = require('../config');
 
 const controlarPadron = async (req, res) => {
     let datos = await persona.getPersona(req, res);
-    //console.log(datos);
     let cargado = false;
     if(datos == null){
         cargado = false;
@@ -21,15 +21,15 @@ const controlarPadron = async (req, res) => {
 const cargarPadron = async (req, res) => {
     let blockchains = await blockchain.getBlockchain(req, res);
     if(blockchains != null){
-        const response = await fetch('http://192.168.0.109:3010/personas', {
+        const response = await fetch('http://'+ ConfigEnv.PADRON_HOST +':'+ ConfigEnv.PADRON_PORT +'/'+ ConfigEnv.PADRON_ROUTE, {
             method: 'post',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                "usuario":"tesisfinal",
-                "contrasena":"t3s15f1n47"
+                "usuario": ConfigEnv.PADRON_USER ,
+                "contrasena": ConfigEnv.PADRON_PASS
             })
         });
         const data = await response.json();
