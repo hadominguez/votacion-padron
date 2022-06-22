@@ -1,0 +1,72 @@
+<%- include ('../layouts/header') %>
+<%- include ('../layouts/header_options') %>
+<h2><%= title %></h2>
+
+<% if (data) { %>
+    <table class="table">
+        <tr>
+            <th>
+                Fecha Inicio
+            </th>
+            <th>
+                Fecha Fin
+            </th>
+        </tr>
+            <tr>
+                <td>
+                    <%= data.fecha_inicio %> <%= data.hora_inicio %> 
+                </td>
+                <td>
+                    <%= data.fecha_fin %> <%= data.hora_fin %>
+                </td>
+            </tr>
+    </table>
+    <br>
+    <h3>Modificar Fecha</h3>
+    <form class="form" name="myForm" action="/fecha" method="post" enctype="application/x-www-form-urlencoded">
+        <div class="form-label-group">
+            <strong>Fecha Inicio:</strong>
+            <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" required="" min="2022-01-01" value="<%= data.fecha_inicio %>" placeholder="Fecha Inicio" />
+        </div>
+        <div class="form-label-group">
+            <strong>Hora Inicio:</strong>
+            <input type="time" class="form-control" id="hora_inicio" name="hora_inicio" required="" value="<%= data.hora_inicio %>" placeholder="Hora Inicio" />
+        </div>
+        <div class="form-label-group">
+            <strong>Fecha Fin:</strong>
+            <input type="date" class="form-control" id="fecha_fin" name="fecha_fin" required="" min="2022-01-01" value="<%= data.fecha_fin %>" placeholder="Fecha Fin" />
+        </div>
+        <div class="form-label-group">
+            <strong>Hora Fin:</strong>
+            <input type="time" class="form-control" id="hora_fin" name="hora_fin" required="" value="<%= data.hora_fin %>" placeholder="Hora Fin" />
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </form>
+<% } else { %>
+    <h3><strong>Sin Fecha Asignada</strong></h3>
+    <br>
+    <h3>Cargar Fecha</h3>
+    <form class="form" name="myForm" action="/fecha" method="post" enctype="application/x-www-form-urlencoded">
+        <div class="form-label-group">
+            <strong>Fecha Inicio:</strong>
+            <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" required="" min="2022-01-01" placeholder="Fecha Inicio" />
+        </div>
+        <div class="form-label-group">
+            <strong>Hora Inicio:</strong>
+            <input type="time" class="form-control" id="hora_inicio" name="hora_inicio" required="" placeholder="Hora Inicio" />
+        </div>
+        <div class="form-label-group">
+            <strong>Fecha Fin:</strong>
+            <input type="date" class="form-control" id="fecha_fin" name="fecha_fin" required="" min="2022-01-01" placeholder="Fecha Fin" />
+        </div>
+        <div class="form-label-group">
+            <strong>Hora Fin:</strong>
+            <input type="time" class="form-control" id="hora_fin" name="hora_fin" required="" placeholder="Hora Fin" />
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </form>
+<% } %>
+
+
+
+<%- include ('../layouts/footer') %>

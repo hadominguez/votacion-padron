@@ -9,6 +9,7 @@ const account = require('./controllers/account');
 const gestion = require('./controllers/gestion');
 const padron = require('./controllers/padron');
 const blockchain = require('./controllers/blockchain');
+const fecha = require('./controllers/fecha');
 
 module.exports = function (routerControl, routerControlAPI, app){
     app.get('/', routerControl, (req, res) => {
@@ -48,6 +49,13 @@ module.exports = function (routerControl, routerControlAPI, app){
         padron.cargarPadron(req, res);
     });
 
+
+    app.get('/fecha', routerControl, account.permisosControl('/fecha'), (req, res) => {
+        fecha.fechaRender(req, res);
+    });
+    app.post('/fecha', routerControl, account.permisosControl('/fecha'), (req, res) => {
+        fecha.fecha(req, res);
+    });
 
     app.get('/blockchain', routerControl, account.permisosControl('/blockchain'), (req, res) => {
         blockchain.listarBlockchain(req, res);

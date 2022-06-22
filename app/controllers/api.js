@@ -1,41 +1,44 @@
 const persona = require('../db/models/persona');
 const blockchain = require('../db/models/blockchain');
-const candidato = require('../db/models/candidato');
-const puesto = require('../db/models/puesto');
 const lista = require('../db/models/lista');
 const horario = require('../db/models/horario');
 const fetch = require('node-fetch');
 const ConfigEnv = require('../config');
 
 const validarDatos = async (req, res) => {
-    const response = await fetch('http://'+ ConfigEnv.VALIDAR_HOST +':'+ ConfigEnv.VALIDAR_PORT +'/'+ ConfigEnv.VALIDAR_ROUTE , {
-        method: 'post',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            "usuario": ConfigEnv.VALIDAR_USER,
-            "contrasena": ConfigEnv.VALIDAR_PASS,
-            "dni": req.body.dni,
-            "nro_tramite": req.body.nro_tramite,
-            "sexo": req.body.sexo
-        })
-    });
-    const data = await response.json();
-    if(data){
-        let persona_existe = await persona.getValidarPersona(data, res);
-        if (persona_existe != null){
-            res.status(200).json(persona_existe);
-        } else {
+    var en_hora = await horario.getHorario(req, res);
+    var hora = false;
+    if(en_hora.horario >= 1){
+        hora = true;
+        const response = await fetch('http://'+ ConfigEnv.VALIDAR_HOST +':'+ ConfigEnv.VALIDAR_PORT +'/'+ ConfigEnv.VALIDAR_ROUTE , {
+            method: 'post',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "usuario": ConfigEnv.VALIDAR_USER,
+                "contrasena": ConfigEnv.VALIDAR_PASS,
+                "dni": req.body.dni,
+                "nro_tramite": req.body.nro_tramite,
+                "sexo": req.body.sexo
+            })
+        });
+        const data = await response.json();
+        if(data){
+            let persona_existe = await persona.getValidarPersona(data, res);
+            if (persona_existe != null){
+                res.status(200).json({persona: persona_existe, horario: hora});
+            } else {
+                res.send({ 
+                    mensaje: 'La persona no se encuentra en el padron.', tipo: "Error"
+                });
+            }
+        }else{
             res.send({ 
-                mensaje: 'La persona no se encuentra en el padron.', tipo: "Error"
+                mensaje: 'Persona no existe.', tipo: "Error"
             });
         }
-    }else{
-        res.send({ 
-            mensaje: 'Persona no existe.', tipo: "Error"
-        });
     }
 };
 
@@ -65,7 +68,6 @@ const verificarVoto = async (req, res) => {
             voto_modificado = true;
         }
     }
-    console.log(voto_modificado);
     res.status(200).json({ modificado: voto_modificado });
 
 };
@@ -76,7 +78,6 @@ const votar = async (req, res) => {
         let persona_existe = await persona.getValidarPersona(req.body.data, res);
         let blocks = await blockchain.getBlockchainId(persona_existe.bchain, res);
         if (persona_existe.voto != true){
-            console.log(blocks.ip );
             const response = await fetch('http://'+ blocks.ip +':'+ blocks.puerto +'/mine', {
                 method: 'post',
                 headers: {
@@ -97,12 +98,12 @@ const votar = async (req, res) => {
             });
             const data = await response.json();
             let resultado = await persona.updatePersonaVota(persona_existe.persona, res);
-            res.status(200).json({ resultado: true });
+            res.status(200).json({ resultado: true, horario: true });
         }else{
-            res.status(200).json({ resultado: false });
+            res.status(200).json({ resultado: false, horario: true });
         }
     }else{
-        res.status(200).json({ resultado: false });
+        res.status(200).json({ resultado: false, horario: false });
     }
 };
 

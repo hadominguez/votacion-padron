@@ -1,8 +1,17 @@
 const blockchain = require('../db/models/blockchain');
 const lista = require('../db/models/lista');
+const horario = require('../db/models/horario');
 const fetch = require('node-fetch');
 
 const index = async(req, res) => {
+    var en_hora = await horario.getHorario(req, res);
+    var resultados_mensaje = '';
+    if(en_hora.horario >= 1){
+        resultados_mensaje  = 'Resultados Parciales';
+    }else{
+        resultados_mensaje = 'Resultados Finales';
+    }
+
     let blocks = await blockchain.getBlockchain();
     var votos_modificados = 0;
     var votos_validos = 0;
@@ -32,7 +41,6 @@ const index = async(req, res) => {
     let total_servidores = datos_comparar.length;
     if(total_servidores >= 1 && datos_comparar[0].length > 1){
         for(var i=1; i < datos_comparar[0].length; i++) {
-
             var celhash = datos_comparar[0][i].data[0].celhash;
             var voto1 = datos_comparar[0][i].data[0].voto1;
             var voto2 = datos_comparar[0][i].data[0].voto2;
@@ -84,7 +92,7 @@ const index = async(req, res) => {
     }
 
     res.render('index', {
-        title: 'Resultados Parciales',
+        title: resultados_mensaje,
         votos_modificados: votos_modificados,
         votos_validos: votos_validos,
         votos_totales: votos_totales,
