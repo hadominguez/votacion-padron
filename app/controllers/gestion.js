@@ -1,6 +1,7 @@
 const blockchain = require('../db/models/blockchain');
 const lista = require('../db/models/lista');
 const horario = require('../db/models/horario');
+const persona = require('../db/models/persona');
 const fetch = require('node-fetch');
 
 const index = async(req, res) => {
@@ -13,6 +14,7 @@ const index = async(req, res) => {
     }
 
     let blocks = await blockchain.getBlockchain();
+    var votos_permitidos = await persona.getCantVotantes();
     var votos_modificados = 0;
     var votos_validos = 0;
     var votos_totales = 0;
@@ -96,6 +98,7 @@ const index = async(req, res) => {
         votos_modificados: votos_modificados,
         votos_validos: votos_validos,
         votos_totales: votos_totales,
+        votos_permitidos: votos_permitidos.total,
         lista: lista_final,
       } );
 }

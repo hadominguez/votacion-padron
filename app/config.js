@@ -11,8 +11,8 @@ const HTTP_PORT = 3011;
 const VALIDAR_HOST = "localhost";
 const VALIDAR_PORT = "3050";
 const VALIDAR_ROUTE = "verificar";
-const VALIDAR_USER =  "renaper";
-const VALIDAR_PASS =  "r3n4p3r";
+const VALIDAR_USER =  "validar";
+const VALIDAR_PASS =  "v4l1d4r";
 
 const PADRON_HOST = "localhost";
 const PADRON_PORT = "3010";

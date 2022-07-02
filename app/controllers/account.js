@@ -1,7 +1,6 @@
 const SHA256 = require('crypto-js/sha256');
 const usuario = require('../db/models/usuario');
 const rol = require('../db/models/rol');
-//const JWT = require('jsonwebtoken');
 const ConfigEnv = require('../config');
 
 

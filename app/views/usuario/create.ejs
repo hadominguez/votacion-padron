@@ -1,0 +1,23 @@
+<%- include ('../layouts/header') %>
+<%- include ('../layouts/header_options') %>
+<h2><%=title%></h2>
+<form class="form" name="myForm" action="/usuario/create" method="post" enctype="application/x-www-form-urlencoded">
+    <div class="form-label-group">
+        <input type="text" class="form-control" id="usuario" name="usuario" required="" placeholder="Usuario" >
+    </div>
+    <div class="form-label-group">
+        <input type="password" class="form-control" id="clave" name="clave" required="" placeholder="Clave" >
+    </div>
+    <div class="form-label-group">
+      <select id="role" name="role" class="form-control">
+        <% for(var i=0; i < data.length; i++) { %>
+        <option value="<%= data[i].role %>"><%= data[i].descripcion %></option>
+        <% } %>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Crear</button>
+    
+  </form>
+
+  <%- include ('../layouts/footer') %>
+  

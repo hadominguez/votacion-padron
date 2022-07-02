@@ -3,10 +3,10 @@ const lista = require('../db/models/lista');
 const puesto = require('../db/models/puesto');
 
 const listarCandidato = async (req, res) => {
-    let blocks = await candidato.getCandidato();
+    let candidatos = await candidato.getCandidato();
     res.render('candidato/lista', {
       title: 'Listado de Candidatos',
-      data: blocks
+      data: candidatos
     });
 };
 

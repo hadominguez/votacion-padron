@@ -1,7 +1,7 @@
 const persona = require('./db/models/persona');
-const usuario = require('./db/models/usuario');
 
 const api = require('./controllers/api');
+const usuario = require('./controllers/usuario');
 const puesto = require('./controllers/puesto');
 const candidato = require('./controllers/candidato');
 const lista = require('./controllers/lista');
@@ -153,28 +153,25 @@ module.exports = function (routerControl, routerControlAPI, app){
 
 
 
-    app.get('/usuario', routerControl, (req, res) => {
-        usuario.getUsuario(req, res);
+    app.get('/usuario', routerControl, account.permisosControl('/usuario'), (req, res) => {
+        usuario.listarUsuario(req, res);
     });
-    app.get('/usuario/:usuario', routerControl, (req, res) => {
-        usuario.getUsuarioById(req, res);
-    });
-    app.get('/usuario/create', routerControl, (req, res) => {
+    app.get('/usuario/create', routerControl, account.permisosControl('/usuario/create'), (req, res) => {
         usuario.createUsuarioRender(req, res);
     });
-    app.post('/usuario/create', routerControl, (req, res) => {
+    app.post('/usuario/create', routerControl, account.permisosControl('/usuario/create'), (req, res) => {
         usuario.createUsuario(req, res);
     });
-    app.get('/usuario/edit/:usuario', routerControl, (req, res) => {
+    app.get('/usuario/edit/:id', routerControl, account.permisosControl('/usuario/edit'), (req, res) => {
         usuario.editUsuarioRender(req, res);
     });
-    app.put('/usuario/edit/:usuario', routerControl, (req, res) => {
+    app.post('/usuario/edit', routerControl, account.permisosControl('/usuario/edit'), (req, res) => {
         usuario.editUsuario(req, res);
     });
-    app.get('/usuario/delete/:usuario', routerControl, (req, res) => {
+    app.get('/usuario/delete/:id', routerControl, account.permisosControl('/usuario/delete'), (req, res) => {
         usuario.deleteUsuarioRender(req, res);
     });
-    app.delete('/usuario/delete/:usuario', routerControl, (req, res) => {
+    app.post('/usuario/delete', routerControl, account.permisosControl('/usuario/delete'), (req, res) => {
         usuario.deleteUsuario(req, res);
     });
   

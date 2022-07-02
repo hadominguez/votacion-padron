@@ -1,10 +1,10 @@
 const lista = require('../db/models/lista');
 
 const listarLista = async (req, res) => {
-    let blocks = await lista.getLista();
+    let listas = await lista.getLista();
     res.render('lista/lista', {
       title: 'Lista de partidos',
-      data: blocks
+      data: listas
     });
 };
 

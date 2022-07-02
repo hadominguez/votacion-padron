@@ -1,0 +1,15 @@
+<%- include ('../layouts/header') %>
+<%- include ('../layouts/header_options') %>
+<h2><%=title%></h2>
+<form class="form" name="myForm" action="/usuario/delete" method="post" enctype="application/x-www-form-urlencoded">
+    <div class="form-label-group" hidden>
+      <input type="number" class="form-control" id="id" name="id" required="" placeholder="id" value="<%= data.id %>">
+    </div>
+
+        <p>Usuario: <%= data.usuario %></p>
+    <button type="submit" class="btn btn-primary">Eliminar</button>
+    
+  </form>
+
+  <%- include ('../layouts/footer') %>
+  

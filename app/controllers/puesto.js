@@ -1,10 +1,10 @@
 const puesto = require('../db/models/puesto');
 
 const listarPuesto = async (req, res) => {
-    let blocks = await puesto.getPuesto();
+    let puestos = await puesto.getPuesto();
     res.render('puesto/lista', {
       title: 'Listado de Puestos',
-      data: blocks
+      data: puestos
     });
 };
 
