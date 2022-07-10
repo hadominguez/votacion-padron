@@ -4,7 +4,9 @@ const horario = require('../db/models/horario');
 const persona = require('../db/models/persona');
 const fetch = require('node-fetch');
 
+//render de la pantalla de resultados
 const index = async(req, res) => {
+    //contola la fecha
     var en_hora = await horario.getHorario(req, res);
     var resultados_mensaje = '';
     if(en_hora.horario >= 1){
@@ -13,13 +15,16 @@ const index = async(req, res) => {
         resultados_mensaje = 'Resultados Finales';
     }
 
+    //trae todos los servidores
     let blocks = await blockchain.getBlockchain();
+    //cuenta la cantidad de votantes habilitados
     var votos_permitidos = await persona.getCantVotantes();
     var votos_modificados = 0;
     var votos_validos = 0;
     var votos_totales = 0;
     var datos_comparar = [];
     for(var i=0; i < blocks.length; i++) { 
+        //trae los datos de los servidores
         const response = await fetch('http://'+ blocks[i].ip +':'+ blocks[i].puerto +'/blocks', {
             method: 'post',
             headers: {
@@ -41,6 +46,7 @@ const index = async(req, res) => {
     var votos3 =[];
 
     let total_servidores = datos_comparar.length;
+    //compara los votos, menos el del bloque inicial
     if(total_servidores >= 1 && datos_comparar[0].length > 1){
         for(var i=1; i < datos_comparar[0].length; i++) {
             var celhash = datos_comparar[0][i].data[0].celhash;
@@ -72,6 +78,7 @@ const index = async(req, res) => {
 
     var listas = await lista.getListaFinal(req, res);
     var lista_final = [];
+    //suma de votos
     for(var x=0; x < listas.length; x++) {
         var total = 0;
         for(var y=0; y < votos1.length; y++) {

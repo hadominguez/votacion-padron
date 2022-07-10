@@ -12,7 +12,7 @@ const controlarPadron = async (req, res) => {
         cargado = true;
     }
     res.render('padron/padron', {
-      title: 'Padron',
+      title: 'Padrón',
       padron: cargado
     });
 };

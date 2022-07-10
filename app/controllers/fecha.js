@@ -1,5 +1,6 @@
 const horario = require('../db/models/horario');
 
+//render de la pantalla de fechas
 const fechaRender = async (req, res) => {
     let fecha = await horario.getHorarios();
     res.render('fecha/fecha', {
@@ -8,7 +9,7 @@ const fechaRender = async (req, res) => {
     });
 };
 
-
+//alamacena o modifica las fechas
 const fecha = async (req, res) => {
   let fecha = await horario.getHorarios();
   if(fecha){
